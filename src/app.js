@@ -25,7 +25,7 @@ app.post("/signup",async (req,res)=>{
     await user.save();
     res.send("user added successfully");
    }catch(err){
-    res.send("problem adding");
+    res.send(err);
 
    }
 });
@@ -85,7 +85,7 @@ app.patch("/user",async (req,res)=>{
     const body=req.body;
 
     try{
-        const user = await User.findByIdAndUpdate({_id:id},req.body);
+        const user = await User.findByIdAndUpdate({_id:id},req.body,{runValidators:true});
         res.send(`${user} updated`);
 
 
